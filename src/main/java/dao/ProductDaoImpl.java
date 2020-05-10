@@ -47,9 +47,11 @@ public class ProductDaoImpl implements ProductDao
             if (product.getId() == productId)
             {
                 products.remove(product);
+                numberOfProducts--;
                 break;
             }
         }
+
     }
 
     @Override
@@ -60,9 +62,11 @@ public class ProductDaoImpl implements ProductDao
             if (product.getProductName().equals(productName))
             {
                 products.remove(product);
+                numberOfProducts--;
                 break;
             }
         }
+
 
     }
 
