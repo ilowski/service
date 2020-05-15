@@ -1,4 +1,4 @@
-package company;
+package products;
 
 public class Cloth extends Product {
     private String size;
@@ -21,10 +21,7 @@ public class Cloth extends Product {
 
     public String toString()
     {
-        return super.toString() + " Cloth { " +
-                "size: " + size +
-                ", material: " + material +
-                "}";
+        return super.toString() + PRODUCT_SEPARATOR + size + PRODUCT_SEPARATOR + material;
 
     }
 

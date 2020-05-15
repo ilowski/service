@@ -1,4 +1,4 @@
-package company;
+package products;
 
 public class Boots extends Product {
     private int size;
@@ -21,9 +21,6 @@ public class Boots extends Product {
 
     public String toString()
     {
-        return super.toString() + " Boots {" +
-                "size = " + getSize() +
-                ", isNaturalSkin = " + isNaturalSkin +
-                "}";
+        return super.toString() + +PRODUCT_SEPARATOR + size + PRODUCT_SEPARATOR + isNaturalSkin;
     }
 }

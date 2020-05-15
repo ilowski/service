@@ -1,6 +1,8 @@
-package company;
+package main;
 
 import dao.ProductDaoImpl;
+import products.Cloth;
+import products.Product;
 
 import java.io.File;
 import java.io.IOException;

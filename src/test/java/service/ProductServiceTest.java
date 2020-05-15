@@ -1,8 +1,8 @@
 package service;
 
-import company.Boots;
-import company.Cloth;
-import company.Product;
+import products.Boots;
+import products.Cloth;
+import products.Product;
 import org.junit.Assert;
 import org.junit.Test;
 

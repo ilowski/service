@@ -1,6 +1,6 @@
 package service;
 
-import company.User;
+import products.User;
 import org.junit.Assert;
 import org.junit.Test;
 

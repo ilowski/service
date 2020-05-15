@@ -1,7 +1,7 @@
 package service;
 
 import api.ProductService;
-import company.Product;
+import products.Product;
 
 import java.util.ArrayList;
 

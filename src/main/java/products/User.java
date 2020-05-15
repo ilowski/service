@@ -1,10 +1,11 @@
-package company;
+package products;
 
 public class User {
 
     private int id;
     private String login;
     private String password;
+    public final static String USER_SEPARATOR = "#";
 
     public User (int id, String login, String password)
     {
@@ -27,10 +28,6 @@ public class User {
 
     public String toString()
     {
-        return "User {" +
-                "id = " + getId() +
-                ", Login = " + getLogin() +
-                ", Password = " + getPassword()+
-                "}";
+        return id + USER_SEPARATOR + login + USER_SEPARATOR +password;
     }
 }

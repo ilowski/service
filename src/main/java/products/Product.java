@@ -1,4 +1,4 @@
-package company;
+package products;
 
 public class Product {
     private int id;
@@ -7,6 +7,7 @@ public class Product {
     private float  weight;
     private String color;
     private int productCount;
+    public final static String PRODUCT_SEPARATOR = "#";
 
     public Product(int id, String productName, float price, float weight, String color, int productCount) {
         this.id = id;
@@ -53,14 +54,7 @@ public class Product {
     }
 
     public String toString() {
-        return "Product{" +
-                "id=" + id +
-                ", productName='" + productName + '\'' +
-                ", price=" + price +
-                ", weight=" + weight +
-                ", color='" + color + '\'' +
-                ", productCount=" + productCount +
-                '}';
+        return id + PRODUCT_SEPARATOR + productName + PRODUCT_SEPARATOR + price + PRODUCT_SEPARATOR + weight + PRODUCT_SEPARATOR + color + PRODUCT_SEPARATOR + productCount;
     }
 
 }

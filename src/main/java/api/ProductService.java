@@ -1,6 +1,6 @@
 package api;
 
-import company.Product;
+import products.Product;
 
 import java.util.ArrayList;
 
