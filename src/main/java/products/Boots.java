@@ -21,6 +21,6 @@ public class Boots extends Product {
 
     public String toString()
     {
-        return super.toString() + +PRODUCT_SEPARATOR + size + PRODUCT_SEPARATOR + isNaturalSkin;
+        return super.toString() + PRODUCT_SEPARATOR + size + PRODUCT_SEPARATOR + isNaturalSkin;
     }
 }

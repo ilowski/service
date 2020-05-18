@@ -43,7 +43,7 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public void removeProductById(int productId) throws IOException {
-        products = getAllproducts();
+        products = getAllProducts();
         for (int i = 0; i < products.size(); i++) {
             int currentProductId = products.get(i).getId();
             if (currentProductId == productId) {
@@ -57,7 +57,7 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public void removeProductByName(String productName) throws IOException {
-        products = getAllproducts();
+        products = getAllProducts();
         for (int i = 0; i < products.size(); i++) {
             if (products.get(i).getProductName().equals(productName)) {
                 products.remove(i);
@@ -70,7 +70,7 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public ArrayList<Product> getAllproducts() throws IOException {
+    public ArrayList<Product> getAllProducts() throws IOException {
         ArrayList<Product> allProducts = new ArrayList<Product>();
         BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
 
@@ -89,7 +89,7 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public Product getProductById(int productId) throws IOException {
-        products = getAllproducts();
+        products = getAllProducts();
         for (Product product : products) {
             if (product.getId() == productId) {
                 return product;
@@ -100,7 +100,7 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public Product getProductByProductName(String productName) throws IOException {
-        products = getAllproducts();
+        products = getAllProducts();
         for (Product product : products) {
             if (product.getProductName().equals(productName)) {
                 return product;

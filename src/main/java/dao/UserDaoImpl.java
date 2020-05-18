@@ -12,7 +12,7 @@ public class UserDaoImpl implements UserDao {
     File file;
     ArrayList<User> users;
 
-    public UserDaoImpl(String fileName) {
+    public UserDaoImpl(String fileName) throws IOException {
         this.users = new ArrayList<User>();
         this.file = new File(fileName);
         this.file.createNewFile();
@@ -20,13 +20,13 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void saveUser(User user) {
+    public void saveUser(User user) throws IOException{
         users.add(user);
         saveUsers(users);
     }
 
     @Override
-    public void saveUsers(ArrayList<User> User) {
+    public void saveUsers(ArrayList<User> User) throws IOException{
         file.delete();
         file.createNewFile();
         FileOutputStream fileOutputStream = new FileOutputStream(file, true);
@@ -38,7 +38,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public ArrayList<User> getAllUsers() {
+    public ArrayList<User> getAllUsers() throws IOException {
         ArrayList<User> allUsers = new ArrayList<User>();
         BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
 
@@ -46,7 +46,7 @@ public class UserDaoImpl implements UserDao {
 
         while (readLine != null) {
             User user = Parser.convertToUser(readLine);
-            if (User != null) {
+            if (user != null) {
                 users.add(user);
             }
             readLine = bufferedReader.readLine();
@@ -56,18 +56,18 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public User getUserByLogin(String login) {
+    public User getUserByLogin(String login) throws IOException {
         this.users = getAllUsers();
         for (User user : this.users) {
             if (user.getLogin().equals(login)) {
                 return user;
             }
         }
-        return null
+        return null;
     }
 
     @Override
-    public User getUserById(int id) {
+    public User getUserById(int id) throws IOException{
         this.users = getAllUsers();
         for (User user : this.users) {
             if (user.getId() == id) {
@@ -78,9 +78,9 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void removeUserByLogin(String login) {
+    public void removeUserByLogin(String login) throws IOException{
         this.users = getAllUsers();
-        for (int i=0; i < users.size(); i++) {
+        for (int i = 0; i < users.size(); i++) {
             if (users.get(i).getLogin().equals(login)) {
                 users.remove(i);
                 saveUsers(users);
@@ -89,16 +89,16 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void removeUserById(int id) {
+    public void removeUserById(int id) throws IOException {
         this.users = getAllUsers();
-        for (int i=0; i < users.size(); i++) {
-            if (users.get(i).getId() == id)
-            {
+        for (int i = 0; i < users.size(); i++) {
+            if (users.get(i).getId() == id) {
                 users.remove(i);
                 saveUsers(users);
 
             }
         }
-
     }
+
+
 }

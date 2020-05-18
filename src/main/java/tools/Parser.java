@@ -67,7 +67,7 @@ public class Parser {
         String color = productInformations[4];
         Integer productCount = Integer.parseInt(productInformations[5]);
         Integer size = Integer.parseInt(productInformations[6]);
-        Boolean isNaturalSkin = Boolean.parseBoolean(productInformations[7])
+        Boolean isNaturalSkin = Boolean.parseBoolean(productInformations[7]);
         return new Boots(id, productName, price, weight, color, productCount, size, isNaturalSkin);
 
     }

@@ -1,44 +1,60 @@
 package service;
 
+import Exceptions.UserAlreadyExistException;
+import Exceptions.UserShortLenghtLoginException;
+import Exceptions.UserShortLengthPasswordException;
+import api.UserDao;
 import api.UserService;
+import dao.UserDaoImpl;
 import products.User;
+import tools.equalsUsers;
+import validators.UserValidator;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class UserServiceImpl implements UserService {
 
-    ArrayList<User> users;
+    private static UserServiceImpl instance = null;
+    private UserDao userDao = new UserDaoImpl("users.data");
+    private UserValidator userValidator = UserValidator.getInstance();
 
-    public UserServiceImpl() {
-        this.users = new ArrayList<User>();
+    private UserServiceImpl() {
+
     }
 
-    public UserServiceImpl(ArrayList<User> users)
-    {
-        this.users = users;
+    public static UserServiceImpl getInstance() {
+
+        if (instance == null) {
+            instance = new UserServiceImpl();
+        }
+
+        return instance;
+    }
+
+
+    @Override
+    public ArrayList<User> getUsers() throws IOException {
+        return userDao.getAllUsers();
     }
 
     @Override
-    public ArrayList<User> getUsers() {
-        return users;
-    }
-
-    @Override
-    public void addUser(User user) {
-        users.add(user);
+    public void addUser(User user) throws UserShortLengthPasswordException, UserShortLenghtLoginException, UserAlreadyExistException {
+        if (userValidator.isValidate(user)) {
+            userDao.saveUser(user);
+        }
     }
 
     @Override
     public void removeUserById(int id) {
+        userDao.removeUserById(id);
+    }
 
-        for (int i =0; i<users.size(); i++)
-        {
-            User userFromList = users.get(i);
-            if (userFromList.getId() == id)
-            {
-                users.remove(i);
-                break;
-            }
+    public void equalsUsers(User userFirst, User userSecond) {
+        if (equalsUsers.equals(userFirst, userSecond)) {
+            System.out.println("Same");
+        } else {
+            System.out.println("differenta");
         }
     }
 }

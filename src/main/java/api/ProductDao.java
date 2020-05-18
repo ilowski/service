@@ -10,7 +10,7 @@ public interface ProductDao {
     void saveProducts (ArrayList<Product>products) throws IOException;
     void removeProductById(int productId) throws IOException;
     void removeProductByName(String productName) throws IOException;
-    ArrayList<Product> getAllproducts() throws IOException;
+    ArrayList<Product> getAllProducts() throws IOException;
     Product getProductById(int productId) throws IOException;
     Product getProductByProductName(String productName) throws IOException;
 
