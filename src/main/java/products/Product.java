@@ -1,6 +1,7 @@
 package products;
 
 public class Product {
+    public final static char PRODUCT_TYPE ='P';
     private int id;
     private String productName;
     private float price;
@@ -53,8 +54,11 @@ public class Product {
         this.productCount=productCount;
     }
 
-    public String toString() {
-        return id + PRODUCT_SEPARATOR + productName + PRODUCT_SEPARATOR + price + PRODUCT_SEPARATOR + weight + PRODUCT_SEPARATOR + color + PRODUCT_SEPARATOR + productCount;
+    public String getBasicProductToString() {
+        return  id + PRODUCT_SEPARATOR + productName + PRODUCT_SEPARATOR + price + PRODUCT_SEPARATOR + weight + PRODUCT_SEPARATOR + color + PRODUCT_SEPARATOR + productCount;
     }
 
+    public String toString() {
+        return PRODUCT_TYPE + PRODUCT_SEPARATOR + getBasicProductToString();
+    }
 }

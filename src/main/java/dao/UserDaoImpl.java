@@ -9,24 +9,37 @@ import java.util.ArrayList;
 
 
 public class UserDaoImpl implements UserDao {
-    File file;
-    ArrayList<User> users;
+    private final String fileName = "users.data";
+    private File file;
+    private ArrayList<User> users;
+    private static UserDaoImpl instance = null;
 
-    public UserDaoImpl(String fileName) throws IOException {
-        this.users = new ArrayList<User>();
-        this.file = new File(fileName);
-        this.file.createNewFile();
+    private UserDaoImpl()  {
+        try {
+            file = new File(fileName);
+            file.createNewFile();
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
 
     }
 
+    public static UserDaoImpl getInstance() {
+        if (instance == null) {
+            instance = new UserDaoImpl();
+        }
+        return instance;
+    }
+
     @Override
-    public void saveUser(User user) throws IOException{
+    public void saveUser(User user) throws IOException {
         users.add(user);
         saveUsers(users);
     }
 
     @Override
-    public void saveUsers(ArrayList<User> User) throws IOException{
+    public void saveUsers(ArrayList<User> User) throws IOException {
         file.delete();
         file.createNewFile();
         FileOutputStream fileOutputStream = new FileOutputStream(file, true);
@@ -67,7 +80,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public User getUserById(int id) throws IOException{
+    public User getUserById(int id) throws IOException {
         this.users = getAllUsers();
         for (User user : this.users) {
             if (user.getId() == id) {
@@ -78,7 +91,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void removeUserByLogin(String login) throws IOException{
+    public void removeUserByLogin(String login) throws IOException {
         this.users = getAllUsers();
         for (int i = 0; i < users.size(); i++) {
             if (users.get(i).getLogin().equals(login)) {

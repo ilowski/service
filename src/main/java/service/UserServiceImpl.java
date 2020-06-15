@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class UserServiceImpl implements UserService {
 
     private static UserServiceImpl instance = null;
-    private UserDao userDao = new UserDaoImpl("users.data");
+    private UserDao userDao = UserDaoImpl.getInstance();
     private UserValidator userValidator = UserValidator.getInstance();
 
     private UserServiceImpl() {
@@ -39,14 +39,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void addUser(User user) throws UserShortLengthPasswordException, UserShortLenghtLoginException, UserAlreadyExistException {
+    public void addUser(User user) throws IOException, UserShortLengthPasswordException, UserShortLenghtLoginException, UserAlreadyExistException {
         if (userValidator.isValidate(user)) {
             userDao.saveUser(user);
         }
     }
 
     @Override
-    public void removeUserById(int id) {
+    public void removeUserById(int id) throws IOException {
         userDao.removeUserById(id);
     }
 

@@ -5,6 +5,7 @@ import api.ProductService;
 import dao.ProductDaoImpl;
 import products.Product;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class ProductServiceImpl implements ProductService {
@@ -24,17 +25,17 @@ public class ProductServiceImpl implements ProductService {
 
 
     @Override
-    public ArrayList<Product> getAllProducts() {
+    public ArrayList<Product> getAllProducts() throws IOException  {
         return productDao.getAllProducts();
     }
 
     @Override
-    public int countAllProducts() {
+    public int countAllProducts() throws IOException {
         return productDao.getAllProducts().size();
     }
 
     @Override
-    public Product getProductByProductName(String productName) {
+    public Product getProductByProductName(String productName) throws IOException {
         for (Product product : productDao.getAllProducts()) {
             if (product.getProductName().equals(productName)) {
                 return product;
@@ -43,6 +44,18 @@ public class ProductServiceImpl implements ProductService {
         return null;
     }
 
+    @Override
+    public boolean isProductExistByProductId(int id) {
+        return false;
+    }
 
+    @Override
+    public boolean isProductAvaiableByProductName(String productName) {
+        return false;
+    }
 
+    @Override
+    public boolean isProductExistByProductName(String productName) {
+        return false;
+    }
 }

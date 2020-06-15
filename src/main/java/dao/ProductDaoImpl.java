@@ -13,11 +13,16 @@ public class ProductDaoImpl implements ProductDao {
     private int numberOfProducts = 0;
     private String productType;
 
-    public ProductDaoImpl(String fileName, String productType) throws IOException {
-        this.file = new File(fileName);
-        this.file.createNewFile();
-        this.productType = productType;
-        products = new ArrayList<>();
+    public ProductDaoImpl(String fileName, String productType)  {
+        try {
+            this.file = new File(fileName);
+            this.file.createNewFile();
+            this.productType = productType;
+            products = new ArrayList<>();
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @Override
