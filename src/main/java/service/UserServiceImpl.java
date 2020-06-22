@@ -12,6 +12,7 @@ import validators.UserValidator;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class UserServiceImpl implements UserService {
 
@@ -40,6 +41,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void addUser(User user) throws IOException, UserShortLengthPasswordException, UserShortLenghtLoginException, UserAlreadyExistException {
+        if (isUserAlreadyExists(user.getLogin())) {
+            throw new UserAlreadyExistException("Change login!");
+        }
+
         if (userValidator.isValidate(user)) {
             userDao.saveUser(user);
         }
@@ -48,6 +53,24 @@ public class UserServiceImpl implements UserService {
     @Override
     public void removeUserById(int id) throws IOException {
         userDao.removeUserById(id);
+    }
+
+    public boolean isUserAlreadyExists(String login) {
+        User user = getUserByLogin(login);
+        return user != null;
+    }
+
+    public User getUserByLogin(String login) {
+        ArrayList<User> users = getUsers();
+
+        for (User user : users) {
+            if (user.getLogin().equals(login)){
+                return user;
+            }
+        }
+        return null;
+
+
     }
 
     public void equalsUsers(User userFirst, User userSecond) {
