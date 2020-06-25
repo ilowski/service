@@ -1,9 +1,9 @@
 package tools;
 
-import products.Boots;
-import products.Cloth;
-import products.Product;
-import products.User;
+import entity.Boots;
+import entity.Cloth;
+import entity.Product;
+import entity.User;
 
 public class Parser {
 
@@ -32,6 +32,7 @@ public class Parser {
             case Boots.PRODUCT_TYPE:
                 return convertToBoots(productStr);
         }
+        return null;
     }
 
     public static Product convertToProduct(String productStr) {

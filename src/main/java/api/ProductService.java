@@ -1,6 +1,6 @@
 package api;
 
-import products.Product;
+import entity.Product;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,4 +12,6 @@ public interface ProductService {
     boolean isProductAvaiableByProductName(String productName);
     boolean isProductExistByProductName(String productName);
     boolean isProductExistByProductId(int id);
+    boolean saveProduct(Product product);
+
 }

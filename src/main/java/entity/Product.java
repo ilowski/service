@@ -1,4 +1,4 @@
-package products;
+package entity;
 
 public class Product {
     public final static char PRODUCT_TYPE ='P';

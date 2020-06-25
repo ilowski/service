@@ -1,9 +1,9 @@
 package validators;
 
-import Exceptions.UserAlreadyExistException;
-import Exceptions.UserShortLenghtLoginException;
-import Exceptions.UserShortLengthPasswordException;
-import products.User;
+import exceptions.UserAlreadyExistException;
+import exceptions.UserShortLenghtLoginException;
+import exceptions.UserShortLengthPasswordException;
+import entity.User;
 
 import java.io.IOException;
 

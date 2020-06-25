@@ -1,4 +1,4 @@
-package products;
+package entity;
 
 public class Cloth extends Product {
     private String size;

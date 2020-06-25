@@ -1,6 +1,6 @@
 package api;
 
-import products.User;
+import entity.User;
 
 import java.io.IOException;
 import java.util.ArrayList;

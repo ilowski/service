@@ -1,7 +1,7 @@
 package dao;
 
 import api.ProductDao;
-import products.Product;
+import entity.Product;
 import tools.Parser;
 
 import java.io.*;
@@ -12,8 +12,16 @@ public class ProductDaoImpl implements ProductDao {
     private ArrayList<Product> products;
     private int numberOfProducts = 0;
     private String productType;
+    private static ProductDaoImpl instance = null;
 
-    public ProductDaoImpl(String fileName, String productType)  {
+    public static ProductDaoImpl getInstance(String fileName,String productType) {
+        if (instance == null) {
+            instance = new ProductDaoImpl(fileName,productType);
+        }
+        return instance;
+    }
+
+    private ProductDaoImpl(String fileName, String productType)  {
         try {
             this.file = new File(fileName);
             this.file.createNewFile();
@@ -81,7 +89,7 @@ public class ProductDaoImpl implements ProductDao {
 
         String readLine = bufferedReader.readLine();
         while (readLine != null) {
-            Product product = Parser.stringToProduct(readLine, productType);
+            Product product = Parser.stringToProduct(readLine);
             if (product != null) {
                 allProducts.add(product);
             }

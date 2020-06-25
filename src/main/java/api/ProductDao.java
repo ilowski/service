@@ -1,6 +1,6 @@
 package api;
 
-import products.Product;
+import entity.Product;
 
 import java.io.IOException;
 import java.util.ArrayList;

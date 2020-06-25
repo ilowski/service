@@ -1,4 +1,4 @@
-package products;
+package entity;
 
 public class Boots extends Product {
     private int size;

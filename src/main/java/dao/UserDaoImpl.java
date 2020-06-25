@@ -1,7 +1,7 @@
 package dao;
 
 import api.UserDao;
-import products.User;
+import entity.User;
 import tools.Parser;
 
 import java.io.*;
@@ -16,6 +16,7 @@ public class UserDaoImpl implements UserDao {
 
     private UserDaoImpl()  {
         try {
+            users = new ArrayList<User>();
             file = new File(fileName);
             file.createNewFile();
         }
@@ -34,7 +35,9 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void saveUser(User user) throws IOException {
+
         users.add(user);
+
         saveUsers(users);
     }
 
@@ -60,7 +63,7 @@ public class UserDaoImpl implements UserDao {
         while (readLine != null) {
             User user = Parser.convertToUser(readLine);
             if (user != null) {
-                users.add(user);
+                allUsers.add(user);
             }
             readLine = bufferedReader.readLine();
         }

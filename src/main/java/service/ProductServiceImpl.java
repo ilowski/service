@@ -3,7 +3,8 @@ package service;
 import api.ProductDao;
 import api.ProductService;
 import dao.ProductDaoImpl;
-import products.Product;
+import entity.Product;
+import validators.ProductValidator;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,7 +12,7 @@ import java.util.ArrayList;
 public class ProductServiceImpl implements ProductService {
 
     private static ProductServiceImpl instance = null;
-    private ProductDao productDao = new ProductDaoImpl("products.data", "PRODUCT");
+    private ProductDao productDao = ProductDaoImpl.getInstance("products.data", "PRODUCT");
 
     private ProductServiceImpl() {
     }
@@ -56,6 +57,20 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public boolean isProductExistByProductName(String productName) {
+        return false;
+    }
+
+    @Override
+    public boolean saveProduct(Product product) {
+        try {
+            if (ProductValidator.getInstance().isValidate(product)){
+                productDao.saveProduct(product);
+                return true;
+            }
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
         return false;
     }
 }

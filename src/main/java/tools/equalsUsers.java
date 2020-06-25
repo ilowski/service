@@ -1,6 +1,6 @@
 package tools;
 
-import products.User;
+import entity.User;
 
 import java.util.Objects;
 

@@ -1,10 +1,10 @@
 package validators;
 
-import Exceptions.ProductCountNegativeException;
-import Exceptions.ProductNameEmptyException;
-import Exceptions.ProductPriceNoPositiveException;
-import Exceptions.ProductWeightNoPositiveException;
-import products.Product;
+import exceptions.ProductCountNegativeException;
+import exceptions.ProductNameEmptyException;
+import exceptions.ProductPriceNoPositiveException;
+import exceptions.ProductWeightNoPositiveException;
+import entity.Product;
 
 public class ProductValidator {
     private static ProductValidator instance = null;
@@ -36,7 +36,7 @@ public class ProductValidator {
         if (isWeightNoPositive(product.getWeight())) {
             throw new ProductWeightNoPositiveException("Weight is less than 0.01!");
         }
-
+        return true;
     }
 
     public boolean isWeightNoPositive(float weight) {
