@@ -1,5 +1,7 @@
 package entity;
 
+import enums.ProductSeparator;
+
 public class Cloth extends Product {
     private String size;
     private String material;
@@ -23,7 +25,7 @@ public class Cloth extends Product {
 
     public String toString()
     {
-        return PRODUCT_TYPE + PRODUCT_SEPARATOR + super.getBasicProductToString() + PRODUCT_SEPARATOR + size + PRODUCT_SEPARATOR + material;
+        return ProductSeparator.PRODUCT_TYPE_CLOTH.getSign() + ProductSeparator.PRODUCT_SEPARATOR.getSign() + super.getBasicProductToString() + ProductSeparator.PRODUCT_SEPARATOR.getSign() + size + ProductSeparator.PRODUCT_SEPARATOR.getSign() + material;
 
     }
 

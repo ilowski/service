@@ -1,5 +1,7 @@
 package entity;
 
+import enums.ProductSeparator;
+
 public class Product {
     public final static char PRODUCT_TYPE ='P';
     private int id;
@@ -8,7 +10,7 @@ public class Product {
     private float  weight;
     private String color;
     private int productCount;
-    public final static String PRODUCT_SEPARATOR = "#";
+
 
     public Product(int id, String productName, float price, float weight, String color, int productCount) {
         this.id = id;
@@ -55,10 +57,10 @@ public class Product {
     }
 
     public String getBasicProductToString() {
-        return  id + PRODUCT_SEPARATOR + productName + PRODUCT_SEPARATOR + price + PRODUCT_SEPARATOR + weight + PRODUCT_SEPARATOR + color + PRODUCT_SEPARATOR + productCount;
+        return  id + ProductSeparator.PRODUCT_SEPARATOR.getSign() + productName + ProductSeparator.PRODUCT_SEPARATOR.getSign() + price + ProductSeparator.PRODUCT_SEPARATOR.getSign() + weight + ProductSeparator.PRODUCT_SEPARATOR.getSign() + color + ProductSeparator.PRODUCT_SEPARATOR.getSign() + productCount;
     }
 
     public String toString() {
-        return PRODUCT_TYPE + PRODUCT_SEPARATOR + getBasicProductToString();
+        return PRODUCT_TYPE + ProductSeparator.PRODUCT_SEPARATOR.getSign() + getBasicProductToString();
     }
 }

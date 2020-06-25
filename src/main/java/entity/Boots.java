@@ -1,5 +1,7 @@
 package entity;
 
+import enums.ProductSeparator;
+
 public class Boots extends Product {
     private int size;
     private boolean isNaturalSkin;
@@ -22,6 +24,6 @@ public class Boots extends Product {
 
     public String toString()
     {
-        return PRODUCT_TYPE + PRODUCT_SEPARATOR + super.getBasicProductToString() + PRODUCT_SEPARATOR + size + PRODUCT_SEPARATOR + isNaturalSkin;
+        return ProductSeparator.PRODUCT_TYPE_BOOTS.getSign() + ProductSeparator.PRODUCT_SEPARATOR.getSign() + super.getBasicProductToString() + ProductSeparator.PRODUCT_SEPARATOR.getSign() + size + ProductSeparator.PRODUCT_SEPARATOR.getSign() + isNaturalSkin;
     }
 }

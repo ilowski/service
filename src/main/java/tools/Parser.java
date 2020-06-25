@@ -4,6 +4,7 @@ import entity.Boots;
 import entity.Cloth;
 import entity.Product;
 import entity.User;
+import enums.ProductSeparator;
 
 public class Parser {
 
@@ -36,7 +37,7 @@ public class Parser {
     }
 
     public static Product convertToProduct(String productStr) {
-        String[] productInformations = productStr.split(Product.PRODUCT_SEPARATOR);
+        String[] productInformations = productStr.split(ProductSeparator.PRODUCT_SEPARATOR.getSign());
         Integer id = Integer.parseInt(productInformations[1]);
         String productName = productInformations[2];
         Float price = Float.parseFloat(productInformations[3]);
@@ -48,7 +49,7 @@ public class Parser {
 
     public static Cloth convertToCloth(String productStr) {
 
-        String[] productInformations = productStr.split(Product.PRODUCT_SEPARATOR);
+        String[] productInformations = productStr.split(ProductSeparator.PRODUCT_SEPARATOR.getSign());
         Integer id = Integer.parseInt(productInformations[1]);
         String productName = productInformations[2];
         Float price = Float.parseFloat(productInformations[3]);
@@ -63,7 +64,7 @@ public class Parser {
     }
 
     public static Boots convertToBoots(String productStr) {
-        String[] productInformations = productStr.split(Product.PRODUCT_SEPARATOR);
+        String[] productInformations = productStr.split(ProductSeparator.PRODUCT_SEPARATOR.getSign());
         Integer id = Integer.parseInt(productInformations[1]);
         String productName = productInformations[2];
         Float price = Float.parseFloat(productInformations[3]);
