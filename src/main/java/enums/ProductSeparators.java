@@ -1,10 +1,10 @@
 package enums;
 
-public enum ProductSeparator {
+public enum ProductSeparators {
 
     PRODUCT_SEPARATOR("#"), PRODUCT_TYPE_BOOTS("B"), PRODUCT_TYPE_CLOTH("C"),PRODUCT_TYPE_OTHER("P");
 private String sign;
-    ProductSeparator(String sign) {
+    ProductSeparators(String sign) {
         this.sign = sign;
     }
 
