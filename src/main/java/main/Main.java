@@ -6,8 +6,12 @@ import entity.Boots;
 import entity.Cloth;
 import entity.Product;
 import entity.User;
+import enums.Color;
+import enums.Material;
 import facade.UserRegisterLoginFacadeImpl;
 import service.ProductServiceImpl;
+import tools.ColorParser;
+import tools.MaterialParser;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -44,7 +48,8 @@ public class Main {
         System.out.println("What weight is?");
         float weight = scan.nextFloat();
         System.out.println("what is color?");
-        String color = scan.next();
+        String colorStr = scan.next();
+        Color color = ColorParser.parseStringToColor(colorStr);
         System.out.println("what count?");
         int count = scan.nextInt();
         System.out.println("what size?");
@@ -64,13 +69,15 @@ public class Main {
         System.out.println("Weight: ");
         float weight = scan.nextFloat();
         System.out.println("Color: ");
-        String color = scan.next();
+        String colorStr = scan.next();
+        Color color = ColorParser.parseStringToColor(colorStr);
         System.out.println("Count: ");
         int count = scan.nextInt();
         System.out.println("Size: ");
         String size = scan.next();
         System.out.println("Material: ");
-        String material = scan.next();
+        String materialStr = scan.next();
+        Material material = MaterialParser.parseStringToMaterial(materialStr);
 
         return new Cloth(1, productName, price, weight, color, count, size, material);
 
@@ -84,7 +91,8 @@ public class Main {
         System.out.println("Weight: ");
         float weight = scan.nextFloat();
         System.out.println("Color: ");
-        String color = scan.next();
+        String colorStr = scan.next();
+        Color color = ColorParser.parseStringToColor(colorStr);
         System.out.println("Count: ");
         int count = scan.nextInt();
 

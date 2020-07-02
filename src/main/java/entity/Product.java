@@ -9,7 +9,7 @@ public class Product {
     private String productName;
     private float price;
     private float  weight;
-    private String color;
+    private Color color;
     private int productCount;
 
 
@@ -26,7 +26,7 @@ public class Product {
     {
         return productCount;
     }
-    public String getColor()
+    public Color getColor()
     {
         return color;
     }

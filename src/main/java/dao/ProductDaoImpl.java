@@ -2,7 +2,7 @@ package dao;
 
 import api.ProductDao;
 import entity.Product;
-import tools.Parser;
+import tools.ProductParser;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -89,7 +89,7 @@ public class ProductDaoImpl implements ProductDao {
 
         String readLine = bufferedReader.readLine();
         while (readLine != null) {
-            Product product = Parser.stringToProduct(readLine);
+            Product product = ProductParser.stringToProduct(readLine);
             if (product != null) {
                 allProducts.add(product);
             }

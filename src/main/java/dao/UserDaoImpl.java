@@ -2,7 +2,7 @@ package dao;
 
 import api.UserDao;
 import entity.User;
-import tools.Parser;
+import tools.ProductParser;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -61,7 +61,7 @@ public class UserDaoImpl implements UserDao {
         String readLine = bufferedReader.readLine();
 
         while (readLine != null) {
-            User user = Parser.convertToUser(readLine);
+            User user = ProductParser.convertToUser(readLine);
             if (user != null) {
                 allUsers.add(user);
             }

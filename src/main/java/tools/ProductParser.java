@@ -5,9 +5,10 @@ import entity.Cloth;
 import entity.Product;
 import entity.User;
 import enums.Color;
+import enums.Material;
 import enums.ProductSeparators;
 
-public class Parser {
+public class ProductParser {
 
     public static User convertToUser(String userStr) {
         String userInformations[] = userStr.split(User.USER_SEPARATOR);
@@ -58,7 +59,7 @@ public class Parser {
         Color color = ColorParser.parseStringToColor(productInformations[5]);
         Integer productCount = Integer.parseInt(productInformations[6]);
         String size = productInformations[7];
-        String material = productInformations[8];
+        Material material = MaterialParser.parseStringToMaterial(productInformations[8]);
 
         return new Cloth(id, productName, price, weight, color, productCount, size, material);
 
