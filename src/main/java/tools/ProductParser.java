@@ -4,6 +4,7 @@ import entity.Boots;
 import entity.Cloth;
 import entity.Product;
 import entity.User;
+import enums.Color;
 import enums.ProductSeparators;
 
 public class Parser {
@@ -42,7 +43,7 @@ public class Parser {
         String productName = productInformations[2];
         Float price = Float.parseFloat(productInformations[3]);
         Float weight = Float.parseFloat(productInformations[4]);
-        String color = productInformations[5];
+        Color color = ColorParser.parseStringToColor(productInformations[5]);
         Integer productCount = Integer.parseInt(productInformations[6]);
         return new Product(id, productName, price, weight, color, productCount);
     }
@@ -54,7 +55,7 @@ public class Parser {
         String productName = productInformations[2];
         Float price = Float.parseFloat(productInformations[3]);
         Float weight = Float.parseFloat(productInformations[4]);
-        String color = productInformations[5];
+        Color color = ColorParser.parseStringToColor(productInformations[5]);
         Integer productCount = Integer.parseInt(productInformations[6]);
         String size = productInformations[7];
         String material = productInformations[8];
@@ -69,7 +70,7 @@ public class Parser {
         String productName = productInformations[2];
         Float price = Float.parseFloat(productInformations[3]);
         Float weight = Float.parseFloat(productInformations[4]);
-        String color = productInformations[5];
+        Color color = ColorParser.parseStringToColor(productInformations[5]);
         Integer productCount = Integer.parseInt(productInformations[6]);
         Integer size = Integer.parseInt(productInformations[7]);
         Boolean isNaturalSkin = Boolean.parseBoolean(productInformations[8]);

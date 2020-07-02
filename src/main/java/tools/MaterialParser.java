@@ -1,4 +1,4 @@
 package tools;
 
-public enum MaterialParser {
+public class MaterialParser {
 }
