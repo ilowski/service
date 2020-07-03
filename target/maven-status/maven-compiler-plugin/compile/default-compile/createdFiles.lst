@@ -1,4 +1,0 @@
-exceptions/UserShortLenghtLoginException.class
-validators/UserValidator.class
-exceptions/UserShortLengthPasswordException.class
-exceptions/UserAlreadyExistException.class
