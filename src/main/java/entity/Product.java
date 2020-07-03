@@ -4,7 +4,7 @@ import enums.Color;
 import enums.ProductSeparators;
 
 public class Product {
-    public final static char PRODUCT_TYPE ='P';
+
     private int id;
     private String productName;
     private float price;
@@ -62,6 +62,6 @@ public class Product {
     }
 
     public String toString() {
-        return PRODUCT_TYPE + ProductSeparators.PRODUCT_SEPARATOR.getSign() + getBasicProductToString();
+        return ProductSeparators.PRODUCT_TYPE_OTHER.getSign() + ProductSeparators.PRODUCT_SEPARATOR.getSign() + getBasicProductToString();
     }
 }

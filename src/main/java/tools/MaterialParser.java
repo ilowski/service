@@ -5,17 +5,17 @@ import enums.Material;
 public class MaterialParser {
     public static Material parseStringToMaterial(String materialStr) {
         String material = materialStr.toUpperCase();
-        if (materialStr.equals("LEATHER")) {
+        if (material.equals("LEATHER")) {
             return Material.LEATHER;
-        } else if (materialStr.equals("FUR")) {
+        } else if (material.equals("FUR")) {
             return Material.FUR;
-        } else if (materialStr.equals("WOOL")) {
+        } else if (material.equals("WOOL")) {
             return Material.WOOL;
-        } else if (materialStr.equals("COTTON")) {
+        } else if (material.equals("COTTON")) {
             return Material.COTTON;
-        } else if (materialStr.equals("POLYESTERS")) {
-            return Material.POLYESTERS;
+        } else if (material.equals("POLYESTER")) {
+            return Material.POLYESTER;
         }
-        return Material.POLYESTERS;
+        return Material.POLYESTER;
     }
 }

@@ -49,7 +49,7 @@ public class Main {
         float weight = scan.nextFloat();
         System.out.println("what is color?");
         String colorStr = scan.next();
-        Color color = ColorParser.parseStringToColor(colorStr);
+        Color color = ColorParser.parseStringToColor(scan.next());
         System.out.println("what count?");
         int count = scan.nextInt();
         System.out.println("what size?");
@@ -69,8 +69,7 @@ public class Main {
         System.out.println("Weight: ");
         float weight = scan.nextFloat();
         System.out.println("Color: ");
-        String colorStr = scan.next();
-        Color color = ColorParser.parseStringToColor(colorStr);
+        Color color = ColorParser.parseStringToColor(scan.next());
         System.out.println("Count: ");
         int count = scan.nextInt();
         System.out.println("Size: ");
@@ -91,8 +90,7 @@ public class Main {
         System.out.println("Weight: ");
         float weight = scan.nextFloat();
         System.out.println("Color: ");
-        String colorStr = scan.next();
-        Color color = ColorParser.parseStringToColor(colorStr);
+        Color color = ColorParser.parseStringToColor(scan.next());
         System.out.println("Count: ");
         int count = scan.nextInt();
 
