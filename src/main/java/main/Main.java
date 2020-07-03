@@ -47,7 +47,7 @@ public class Main {
         float price = scan.nextFloat();
         System.out.println("What weight is?");
         float weight = scan.nextFloat();
-        System.out.println("what is color?");
+        System.out.println("what is color? RED/GREEN/BLUE");
         String colorStr = scan.next();
         Color color = ColorParser.parseStringToColor(scan.next());
         System.out.println("what count?");
