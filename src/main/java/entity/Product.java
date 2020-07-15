@@ -11,6 +11,7 @@ public class Product {
     private float  weight;
     private Color color;
     private int productCount;
+    public final static char PRODUCT_TYPE = 'O';
 
 
     public Product(int id, String productName, float price, float weight, Color color, int productCount) {
