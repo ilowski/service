@@ -4,6 +4,7 @@ import entity.User;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public interface UserDao {
 
@@ -11,7 +12,7 @@ public interface UserDao {
 
     void saveUsers(ArrayList<User> users) throws IOException;
 
-    ArrayList<User> getAllUsers() throws IOException;
+    List<User> getAllUsers() throws IOException;
 
     User getUserByLogin(String login) throws IOException;
 

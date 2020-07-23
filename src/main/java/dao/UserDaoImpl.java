@@ -2,28 +2,24 @@ package dao;
 
 import api.UserDao;
 import entity.User;
-import tools.ProductParser;
 
-import java.io.*;
+import java.io.IOException;
+import java.sql.*;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 
 public class UserDaoImpl implements UserDao {
-    private final String fileName = "users.data";
-    private File file;
-    private ArrayList<User> users;
     private static UserDaoImpl instance = null;
+    private final String databaseName = "management";
+    private final String tableName = "users";
+    private final String user = "root";
+    private final String password = "ziomek123";
+    private Connection connection;
 
-    private UserDaoImpl()  {
-        try {
-            users = new ArrayList<User>();
-            file = new File(fileName);
-            file.createNewFile();
-        }
-        catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-
+    private UserDaoImpl() {
+        init();
     }
 
     public static UserDaoImpl getInstance() {
@@ -33,87 +29,115 @@ public class UserDaoImpl implements UserDao {
         return instance;
     }
 
+    public void init() {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost/" + databaseName + "?useSSL=false", user, password);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public void saveUser(User user) throws IOException {
 
-        users.add(user);
 
-        saveUsers(users);
     }
 
     @Override
     public void saveUsers(ArrayList<User> User) throws IOException {
-        file.delete();
-        file.createNewFile();
-        FileOutputStream fileOutputStream = new FileOutputStream(file, true);
-        PrintWriter printWriter = new PrintWriter(fileOutputStream);
-        for (int i = 0; i < users.size(); i++) {
-            printWriter.write(users.get(i).toString() + "\n");
-        }
-        printWriter.close();
+
     }
 
     @Override
-    public ArrayList<User> getAllUsers() throws IOException {
-        ArrayList<User> allUsers = new ArrayList<User>();
-        BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+    public List<User> getAllUsers() throws IOException {
+        List<User> users = new LinkedList<User>();
+        Statement statement = null;
+        try {
+            statement = connection.createStatement();
+            String query = "SELECT * FROM " + tableName;
+            ResultSet resultSet = statement.executeQuery(query);
 
-        String readLine = bufferedReader.readLine();
-
-        while (readLine != null) {
-            User user = ProductParser.convertToUser(readLine);
-            if (user != null) {
-                allUsers.add(user);
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String login = resultSet.getString("login");
+                String password = resultSet.getString("password");
+                User user = new User(id, login, password);
+                users.add(user);
             }
-            readLine = bufferedReader.readLine();
+            return users;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        return allUsers;
 
     }
 
     @Override
     public User getUserByLogin(String login) throws IOException {
-        this.users = getAllUsers();
-        for (User user : this.users) {
-            if (user.getLogin().equals(login)) {
+        Statement statement = null;
+        try {
+            statement = connection.createStatement();
+            String query = "SELECT * FROM " + tableName + " WHERE login ='"+login"'";
+            ResultSet resultSet = statement.executeQuery(query);
+
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String login = resultSet.getString("login");
+                String password = resultSet.getString("password");
+                User user = new User (id,login,password);
                 return user;
             }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        return null;
     }
 
     @Override
     public User getUserById(int id) throws IOException {
-        this.users = getAllUsers();
-        for (User user : this.users) {
-            if (user.getId() == id) {
+        Statement statement = null;
+        try {
+            statement = connection.createStatement();
+            String query = "SELECT * FROM " + tableName + " WHERE id = '" + id + "'";
+            ResultSet resultSet = statement.executeQuery(query);
+
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String login = resultSet.getString("login");
+                String password = resultSet.getString("password");
+                User user = new User(id,login,password);
                 return user;
             }
         }
-        return null;
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void removeUserByLogin(String login) throws IOException {
-        this.users = getAllUsers();
-        for (int i = 0; i < users.size(); i++) {
-            if (users.get(i).getLogin().equals(login)) {
-                users.remove(i);
-                saveUsers(users);
-            }
+        PreparedStatement statement = null;
+
+        try {
+
+            String query = "DELETE FROM " + tableName + " WHERE login=?";
+            statement = connection.prepareStatement(query);
+            statement.setString(1,login);
+            statement.execute();
+            statement.close();
+
         }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override
     public void removeUserById(int id) throws IOException {
-        this.users = getAllUsers();
-        for (int i = 0; i < users.size(); i++) {
-            if (users.get(i).getId() == id) {
-                users.remove(i);
-                saveUsers(users);
 
-            }
-        }
+
     }
 
 
