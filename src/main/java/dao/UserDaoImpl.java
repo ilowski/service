@@ -40,13 +40,18 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void saveUser(User user) throws IOException {
+        PreparedStatement preparedStatement = null;
+        try {
+            String query = "INSERT INTO " + tableName + " (login,password) VALUES(?,?)";
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1,user.getLogin());
+            preparedStatement.setString(2,user.getPassword());
 
-
-    }
-
-    @Override
-    public void saveUsers(ArrayList<User> User) throws IOException {
-
+            preparedStatement.execute();
+            preparedStatement.close();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
     }
 
     @Override
@@ -78,18 +83,20 @@ public class UserDaoImpl implements UserDao {
         Statement statement = null;
         try {
             statement = connection.createStatement();
-            String query = "SELECT * FROM " + tableName + " WHERE login ='"+login"'";
+            String query = "SELECT * FROM " + tableName + " WHERE login ='" + login "'";
             ResultSet resultSet = statement.executeQuery(query);
 
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
                 String login = resultSet.getString("login");
                 String password = resultSet.getString("password");
-                User user = new User (id,login,password);
+                User user = new User(id, login, password);
                 return user;
             }
+            statement.close();
+        }
 
-        } catch (SQLException e) {
+        catch(SQLException e){
             e.printStackTrace();
         }
     }
@@ -106,11 +113,11 @@ public class UserDaoImpl implements UserDao {
                 int id = resultSet.getInt("id");
                 String login = resultSet.getString("login");
                 String password = resultSet.getString("password");
-                User user = new User(id,login,password);
+                User user = new User(id, login, password);
                 return user;
             }
-        }
-        catch (SQLException e) {
+            statement.close();
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -123,12 +130,12 @@ public class UserDaoImpl implements UserDao {
 
             String query = "DELETE FROM " + tableName + " WHERE login=?";
             statement = connection.prepareStatement(query);
-            statement.setString(1,login);
+            statement.setString(1, login);
             statement.execute();
             statement.close();
 
         }
-        catch (SQLException e) {
+        catch(SQLException e){
             e.printStackTrace();
         }
 
@@ -136,6 +143,19 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void removeUserById(int id) throws IOException {
+
+        PreparedStatement preparedStatement = null;
+
+        try {
+            String query = "DELETE FROM  " + tableName + " WHERE id=?";
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, id);
+            preparedStatement.execute();
+            preparedStatement.close();
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
 
 
     }
