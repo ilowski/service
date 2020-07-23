@@ -44,14 +44,14 @@ public class UserDaoImpl implements UserDao {
         try {
             String query = "INSERT INTO " + tableName + " (login,password) VALUES(?,?)";
             preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1,user.getLogin());
-            preparedStatement.setString(2,user.getPassword());
+            preparedStatement.setString(1, user.getLogin());
+            preparedStatement.setString(2, user.getPassword());
 
             preparedStatement.execute();
             preparedStatement.close();
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
+        }
     }
 
     @Override
@@ -83,7 +83,7 @@ public class UserDaoImpl implements UserDao {
         Statement statement = null;
         try {
             statement = connection.createStatement();
-            String query = "SELECT * FROM " + tableName + " WHERE login ='" + login "'";
+            String query = "SELECT * FROM " + tableName + " WHERE login ='" + login + "'";
             ResultSet resultSet = statement.executeQuery(query);
 
             while (resultSet.next()) {
