@@ -5,13 +5,12 @@ import entity.User;
 
 import java.io.IOException;
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 
 public class UserDaoImpl implements UserDao {
-    private static UserDaoImpl instance = null;
+    private static UserDao instance = new UserDaoImpl();
     private final String databaseName = "management";
     private final String tableName = "users";
     private final String user = "root";
@@ -22,18 +21,16 @@ public class UserDaoImpl implements UserDao {
         init();
     }
 
-    public static UserDaoImpl getInstance() {
-        if (instance == null) {
-            instance = new UserDaoImpl();
-        }
+    public static UserDao getInstance() {
+
         return instance;
     }
 
-    public void init() {
+    private void init() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             connection = DriverManager.getConnection("jdbc:mysql://localhost/" + databaseName + "?useSSL=false", user, password);
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -70,17 +67,18 @@ public class UserDaoImpl implements UserDao {
                 User user = new User(id, login, password);
                 users.add(user);
             }
-            return users;
+
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
+        return users;
     }
 
     @Override
     public User getUserByLogin(String login) throws IOException {
         Statement statement = null;
+
         try {
             statement = connection.createStatement();
             String query = "SELECT * FROM " + tableName + " WHERE login ='" + login + "'";
@@ -88,10 +86,10 @@ public class UserDaoImpl implements UserDao {
 
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
-                String login = resultSet.getString("login");
+                String loginResult = resultSet.getString("login");
                 String password = resultSet.getString("password");
-                User user = new User(id, login, password);
-                return user;
+                User user = new User(id, loginResult, password);
+
             }
             statement.close();
         }
@@ -99,27 +97,30 @@ public class UserDaoImpl implements UserDao {
         catch(SQLException e){
             e.printStackTrace();
         }
+        return null;
     }
 
     @Override
     public User getUserById(int id) throws IOException {
         Statement statement = null;
+
         try {
             statement = connection.createStatement();
             String query = "SELECT * FROM " + tableName + " WHERE id = '" + id + "'";
             ResultSet resultSet = statement.executeQuery(query);
 
             while (resultSet.next()) {
-                int id = resultSet.getInt("id");
+                int idResult = resultSet.getInt("id");
                 String login = resultSet.getString("login");
                 String password = resultSet.getString("password");
-                User user = new User(id, login, password);
+                User user = new User(idResult, login, password);
                 return user;
             }
             statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return null;
     }
 
     @Override

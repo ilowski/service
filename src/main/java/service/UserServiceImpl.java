@@ -5,11 +5,13 @@ import api.UserService;
 import dao.UserDaoImpl;
 import entity.User;
 import exceptions.UserAlreadyExistException;
+import exceptions.UserShortLenghtLoginException;
+import exceptions.UserShortLengthPasswordException;
 import tools.equalsUsers;
 import validators.UserValidator;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 
 public class UserServiceImpl implements UserService {
 
@@ -32,26 +34,23 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public ArrayList<User> getUsers() throws IOException {
+    public List<User> getUsers() throws IOException {
         return userDao.getAllUsers();
     }
 
     @Override
-    public boolean addUser(User user) {
-        try {
+    public boolean addUser(User user) throws UserAlreadyExistException, UserShortLenghtLoginException, UserShortLengthPasswordException {
 
-            if (isUserAlreadyExists(user.getLogin())) {
-                throw new UserAlreadyExistException("Change login!");
-            }
-
-            if (userValidator.isValidate(user)) {
-
-                userDao.saveUser(user);
-                return true;
-            }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        if (isUserAlreadyExists(user.getLogin())) {
+            throw new UserAlreadyExistException("Change login!");
         }
+
+        if (userValidator.isValidate(user)) {
+
+            userDao.saveUser(user);
+            return true;
+        }
+
         return false;
     }
 
@@ -67,21 +66,17 @@ public class UserServiceImpl implements UserService {
 
     public User getUserByLogin(String login) {
 
-try {
 
-    ArrayList<User> users = getUsers();
-    System.out.println(users.size());
-    for (User user : users) {
+        List<User> users = getUsers();
+        System.out.println(users.size());
+        for (User user : users) {
 
-        if (user.getLogin().equals(login)) {
+            if (user.getLogin().equals(login)) {
 
-            return user;
+                return user;
+            }
         }
-    }
-}
-catch (Exception e) {
-    System.out.println(e.getMessage());
-}
+
         return null;
 
 
@@ -89,7 +84,7 @@ catch (Exception e) {
 
     @Override
     public User getUserById(int id) throws IOException {
-        ArrayList<User> users = getUsers();
+        List<User> users = getUsers();
         for (User user : users) {
             if (user.getId() == id) {
                 return user;
