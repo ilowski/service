@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public List<User> getUsers() throws IOException {
+    public List<User> getUsers(){
         return userDao.getAllUsers();
     }
 
@@ -55,11 +55,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void removeUserById(int id) throws IOException {
+    public void removeUserById(int id) {
         userDao.removeUserById(id);
     }
 
-    public boolean isUserAlreadyExists(String login) throws IOException {
+    public boolean isUserAlreadyExists(String login)  {
         User user = getUserByLogin(login);
         return user != null;
     }
@@ -83,7 +83,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserById(int id) throws IOException {
+    public User getUserById(int id)  {
         List<User> users = getUsers();
         for (User user : users) {
             if (user.getId() == id) {

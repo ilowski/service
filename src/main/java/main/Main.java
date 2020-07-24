@@ -123,11 +123,7 @@ public class Main {
                     String loginRegister = scan.next();
                     String passwordRegister = scan.next();
                     User user2 = new User(999, loginRegister, passwordRegister);
-                    if (userFacade.registerUser(user2)) {
-                        System.out.println("sukces");
-                    } else {
-                        System.out.println("error");
-                    }
+
                     break;
                 case 0:
                     appOn = false;

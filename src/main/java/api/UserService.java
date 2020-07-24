@@ -5,16 +5,15 @@ import exceptions.UserAlreadyExistException;
 import exceptions.UserShortLenghtLoginException;
 import exceptions.UserShortLengthPasswordException;
 
-import java.io.IOException;
 import java.util.List;
 
 public interface UserService {
 
-    List<User> getUsers() throws IOException;
+    List<User> getUsers();
     boolean addUser(User user) throws UserShortLengthPasswordException, UserShortLenghtLoginException, UserAlreadyExistException;
-    void removeUserById(int id )throws IOException;
-    User getUserById(int id) throws IOException;
-    User getUserByLogin(String login) throws IOException;
+    void removeUserById(int id );
+    User getUserById(int id);
+    User getUserByLogin(String login);
     boolean isCorrectLoginAndPassword(String login, String password);
 
 

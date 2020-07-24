@@ -1,11 +1,9 @@
 package validators;
 
+import entity.User;
 import exceptions.UserAlreadyExistException;
 import exceptions.UserShortLenghtLoginException;
 import exceptions.UserShortLengthPasswordException;
-import entity.User;
-
-import java.io.IOException;
 
 public class UserValidator {
     private static UserValidator instance = null;
@@ -23,7 +21,7 @@ public class UserValidator {
         return instance;
     }
 
-    public boolean isValidate(User user) throws IOException, UserAlreadyExistException, UserShortLenghtLoginException, UserShortLengthPasswordException {
+    public boolean isValidate(User user) throws UserAlreadyExistException, UserShortLenghtLoginException, UserShortLengthPasswordException {
         if (checkUserLoginLength(user.getLogin())) {
             throw new UserShortLenghtLoginException(user.getLogin() + " is too short!");
         }

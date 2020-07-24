@@ -3,7 +3,6 @@ package dao;
 import api.UserDao;
 import entity.User;
 
-import java.io.IOException;
 import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;
@@ -36,7 +35,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void saveUser(User user) throws IOException {
+    public void saveUser(User user) {
         PreparedStatement preparedStatement = null;
         try {
             String query = "INSERT INTO " + tableName + " (login,password) VALUES(?,?)";
@@ -52,7 +51,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public List<User> getAllUsers() throws IOException {
+    public List<User> getAllUsers() {
         List<User> users = new LinkedList<User>();
         Statement statement = null;
         try {
@@ -76,7 +75,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public User getUserByLogin(String login) throws IOException {
+    public User getUserByLogin(String login){
         Statement statement = null;
 
         try {
@@ -101,7 +100,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public User getUserById(int id) throws IOException {
+    public User getUserById(int id) {
         Statement statement = null;
 
         try {
@@ -124,7 +123,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void removeUserByLogin(String login) throws IOException {
+    public void removeUserByLogin(String login) {
         PreparedStatement statement = null;
 
         try {
@@ -143,7 +142,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void removeUserById(int id) throws IOException {
+    public void removeUserById(int id) {
 
         PreparedStatement preparedStatement = null;
 

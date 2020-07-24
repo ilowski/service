@@ -2,24 +2,23 @@ package api;
 
 import entity.User;
 
-import java.io.IOException;
 import java.util.List;
 
 public interface UserDao {
 
-    void saveUser(User user) throws IOException;
+    void saveUser(User user);
 
 
 
-    List<User> getAllUsers() throws IOException;
+    List<User> getAllUsers();
 
-    User getUserByLogin(String login) throws IOException;
+    User getUserByLogin(String login);
 
-    User getUserById(int id) throws IOException;
+    User getUserById(int id);
 
-    void removeUserByLogin(String login) throws IOException;
+    void removeUserByLogin(String login);
 
-    void removeUserById(int id) throws IOException;
+    void removeUserById(int id);
 
 
 }
