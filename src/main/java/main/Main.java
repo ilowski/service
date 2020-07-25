@@ -123,6 +123,7 @@ public class Main {
                     String loginRegister = scan.next();
                     String passwordRegister = scan.next();
                     User user2 = new User(999, loginRegister, passwordRegister);
+                    UserRegisterLoginFacadeImpl.getInstance().registerUser(user2);
 
                     break;
                 case 0:
