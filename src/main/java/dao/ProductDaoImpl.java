@@ -52,7 +52,7 @@ public class ProductDaoImpl implements ProductDao {
             preparedStatement.setString(1, product.getProductName());
             preparedStatement.setFloat(2, product.getPrice());
             preparedStatement.setFloat(3, product.getWeight());
-            preparedStatement.setString(4, product.getColor().getColor();
+            preparedStatement.setString(4, product.getColor().getColor());
             preparedStatement.setInt(5, product.getProductCount());
             preparedStatement.execute();
             preparedStatement.close();
@@ -123,11 +123,51 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public Product getProductById(int productId) {
+        Statement statement = null;
+        try {
+            String query = "SELECT * FROM " + tableName + " WHERE id='" + productId + "'";
+            statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
 
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String productName = resultSet.getString("productName");
+                Float price = resultSet.getFloat("price");
+                Float weight = resultSet.getFloat("weight");
+                String colorStr = resultSet.getString("color");
+                Color color = ColorParser.parseStringToColor(colorStr);
+                int productCount = resultSet.getInt("productCount");
+                Product product = new Product(id, productName, price, weight, color, productCount);
+                return product;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Override
     public Product getProductByProductName(String productName) {
+        Statement statement = null;
+        try {
+            String query = "SELECT * FROM " + tableName + " WHERE productName='" + productName + "'";
+            statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
 
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String productNameResult = resultSet.getString("productName");
+                Float price = resultSet.getFloat("price");
+                Float weight = resultSet.getFloat("weight");
+                String colorStr = resultSet.getString("color");
+                Color color = ColorParser.parseStringToColor(colorStr);
+                int productCount = resultSet.getInt("productCount");
+                Product product = new Product(id, productNameResult, price, weight, color, productCount);
+                return product;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
