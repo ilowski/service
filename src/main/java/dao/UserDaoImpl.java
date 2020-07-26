@@ -13,7 +13,7 @@ public class UserDaoImpl implements UserDao {
     private final String databaseName = "management";
     private final String tableName = "users";
     private final String user = "root";
-    private final String password = "ziomek123";
+    private final String password = "test123";
     private Connection connection;
 
     private UserDaoImpl() {
