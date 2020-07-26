@@ -2,123 +2,82 @@ package dao;
 
 import api.ProductDao;
 import entity.Product;
-import tools.ProductParser;
 
-import java.io.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.util.ArrayList;
 
 public class ProductDaoImpl implements ProductDao {
-    private File file;
-    private ArrayList<Product> products;
-    private int numberOfProducts = 0;
+
     private String productType;
     private static ProductDaoImpl instance = null;
+    private final String databaseName = "management";
+    private final String tableName = "products";
+    private final String user = "root";
+    private final String password = "test123";
+    private Connection connection;
 
-    public static ProductDaoImpl getInstance(String fileName,String productType) {
+
+    public static ProductDaoImpl getInstance() {
         if (instance == null) {
-            instance = new ProductDaoImpl(fileName,productType);
+            instance = new ProductDaoImpl();
         }
         return instance;
     }
 
-    private ProductDaoImpl(String fileName, String productType)  {
+    private ProductDaoImpl()  {
+        init();
+    }
+
+    private void init() {
         try {
-            this.file = new File(fileName);
-            this.file.createNewFile();
-            this.productType = productType;
-            products = new ArrayList<>();
+            Class.forName("com.mysql.jdbc.Driver");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost/" + databaseName + "?userSSL=false", user, password);
         }
         catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    @Override
-    public void saveProduct(Product product) throws IOException {
-        products.add(product);
-        numberOfProducts++;
-        saveProducts(products);
-    }
-
-
-    @Override
-    public void saveProducts(ArrayList<Product> products) throws IOException {
-        file.delete();
-        file.createNewFile();
-        FileOutputStream fileOutputStream = new FileOutputStream(file, true);
-        PrintWriter printWriter = new PrintWriter(fileOutputStream);
-        for (int i = 0; i < products.size(); i++) {
-            printWriter.write(products.get(i).toString() + "\n");
-        }
-        printWriter.close();
-        numberOfProducts = products.size();
-    }
-
-    @Override
-    public void removeProductById(int productId) throws IOException {
-        products = getAllProducts();
-        for (int i = 0; i < products.size(); i++) {
-            int currentProductId = products.get(i).getId();
-            if (currentProductId == productId) {
-                products.remove(i);
-                numberOfProducts--;
-                saveProducts(products);
-            }
+            e.printStackTrace();
         }
 
     }
 
-    @Override
-    public void removeProductByName(String productName) throws IOException {
-        products = getAllProducts();
-        for (int i = 0; i < products.size(); i++) {
-            if (products.get(i).getProductName().equals(productName)) {
-                products.remove(i);
-                numberOfProducts--;
 
-            }
-        }
+
+    @Override
+    public void saveProduct(Product product)  {
+
+    }
+
+
+    @Override
+    public void saveProducts(ArrayList<Product> products) {
+
+    }
+
+    @Override
+    public void removeProductById(int productId) {
+
+
 
 
     }
 
     @Override
-    public ArrayList<Product> getAllProducts() throws IOException {
-        ArrayList<Product> allProducts = new ArrayList<Product>();
-        BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+    public void removeProductByName(String productName) {
 
-        String readLine = bufferedReader.readLine();
-        while (readLine != null) {
-            Product product = ProductParser.stringToProduct(readLine);
-            if (product != null) {
-                allProducts.add(product);
-            }
-            readLine = bufferedReader.readLine();
-        }
-        bufferedReader.close();
 
-        return allProducts;
     }
 
     @Override
-    public Product getProductById(int productId) throws IOException {
-        products = getAllProducts();
-        for (Product product : products) {
-            if (product.getId() == productId) {
-                return product;
-            }
-        }
-        return null;
+    public ArrayList<Product> getAllProducts()  {
+
     }
 
     @Override
-    public Product getProductByProductName(String productName) throws IOException {
-        products = getAllProducts();
-        for (Product product : products) {
-            if (product.getProductName().equals(productName)) {
-                return product;
-            }
-        }
-        return null;
+    public Product getProductById(int productId) {
+
     }
+
+    @Override
+    public Product getProductByProductName(String productName) {
+
 }

@@ -2,16 +2,16 @@ package api;
 
 import entity.Product;
 
-import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public interface ProductDao {
-    void saveProduct (Product product) throws IOException;
-    void saveProducts (ArrayList<Product>products) throws IOException;
-    void removeProductById(int productId) throws IOException;
-    void removeProductByName(String productName) throws IOException;
-    ArrayList<Product> getAllProducts() throws IOException;
-    Product getProductById(int productId) throws IOException;
-    Product getProductByProductName(String productName) throws IOException;
+    void saveProduct (Product product);
+    void saveProducts (ArrayList<Product>products);
+    void removeProductById(int productId);
+    void removeProductByName(String productName);
+    List<Product> getAllProducts();
+    Product getProductById(int productId);
+    Product getProductByProductName(String productName);
 
 }
