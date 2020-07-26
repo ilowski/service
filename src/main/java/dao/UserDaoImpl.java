@@ -66,6 +66,7 @@ public class UserDaoImpl implements UserDao {
                 User user = new User(id, login, password);
                 users.add(user);
             }
+            statement.close();
 
 
         } catch (SQLException e) {
