@@ -9,6 +9,10 @@ public enum Color {
         this.hex = hex;
     }
 
+    public String getColor() {
+        return getClass().getName();
+    }
+
     public String getHex() {
         return hex;
     }
