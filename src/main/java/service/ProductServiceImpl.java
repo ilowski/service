@@ -4,9 +4,7 @@ import api.ProductDao;
 import api.ProductService;
 import dao.ProductDaoImpl;
 import entity.Product;
-import validators.ProductValidator;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class ProductServiceImpl implements ProductService {
@@ -26,17 +24,17 @@ public class ProductServiceImpl implements ProductService {
 
 
     @Override
-    public ArrayList<Product> getAllProducts() throws IOException  {
+    public ArrayList<Product> getAllProducts() {
         return productDao.getAllProducts();
     }
 
     @Override
-    public int countAllProducts() throws IOException {
+    public int countAllProducts() {
         return productDao.getAllProducts().size();
     }
 
     @Override
-    public Product getProductByProductName(String productName) throws IOException {
+    public Product getProductByProductName(String productName) {
         for (Product product : productDao.getAllProducts()) {
             if (product.getProductName().equals(productName)) {
                 return product;
@@ -62,15 +60,6 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public boolean saveProduct(Product product) {
-        try {
-            if (ProductValidator.getInstance().isValidate(product)){
-                productDao.saveProduct(product);
-                return true;
-            }
-        }
-        catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-        return false;
+
     }
 }
