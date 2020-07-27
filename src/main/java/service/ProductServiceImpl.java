@@ -4,13 +4,19 @@ import api.ProductDao;
 import api.ProductService;
 import dao.ProductDaoImpl;
 import entity.Product;
+import exceptions.ProductCountNegativeException;
+import exceptions.ProductNameEmptyException;
+import exceptions.ProductPriceNoPositiveException;
+import exceptions.ProductWeightNoPositiveException;
+import validators.ProductValidator;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class ProductServiceImpl implements ProductService {
 
     private static ProductServiceImpl instance = null;
-    private ProductDao productDao = ProductDaoImpl.getInstance("products.data", "PRODUCT");
+    private ProductDao productDao = ProductDaoImpl.getInstance();
+    private ProductValidator productValidator = ProductValidator.getInstance();
 
     private ProductServiceImpl() {
     }
@@ -24,7 +30,7 @@ public class ProductServiceImpl implements ProductService {
 
 
     @Override
-    public ArrayList<Product> getAllProducts() {
+    public List<Product> getAllProducts() {
         return productDao.getAllProducts();
     }
 
@@ -35,31 +41,46 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product getProductByProductName(String productName) {
-        for (Product product : productDao.getAllProducts()) {
-            if (product.getProductName().equals(productName)) {
-                return product;
-            }
-        }
-        return null;
+        Product product = productDao.getProductByProductName(productName);
+        return product;
     }
 
     @Override
     public boolean isProductExistByProductId(int id) {
-        return false;
+        Product product = productDao.getProductById(id);
+        if (product == null) {
+            return false;
+        }
+        return true;
     }
 
     @Override
     public boolean isProductAvaiableByProductName(String productName) {
-        return false;
+
+        Product product = productDao.getProductByProductName(productName);
+        if (product == null) {
+            return false;
+        }
+
+        return product.getProductCount() > 0;
     }
+
 
     @Override
     public boolean isProductExistByProductName(String productName) {
-        return false;
+        Product product = productDao.getProductByProductName(productName);
+        if (product == null) {
+            return false;
+        }
+        return true;
     }
 
     @Override
-    public boolean saveProduct(Product product) {
-
+    public boolean saveProduct(Product product) throws ProductCountNegativeException, ProductNameEmptyException, ProductPriceNoPositiveException, ProductWeightNoPositiveException {
+        if (productValidator.isValidate(product)) {
+            productDao.saveProduct(product);
+            return true;
+        }
+        return false;
     }
 }
