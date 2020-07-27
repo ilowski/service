@@ -1,5 +1,6 @@
 package main;
 
+import api.ProductFacade;
 import api.ProductService;
 import api.UserRegisterLoginFacade;
 import entity.Boots;
@@ -8,6 +9,7 @@ import entity.Product;
 import entity.User;
 import enums.Color;
 import enums.Material;
+import facade.ProductFacadeImpl;
 import facade.UserRegisterLoginFacadeImpl;
 import service.ProductServiceImpl;
 import tools.ColorParser;
@@ -18,6 +20,7 @@ import java.util.Scanner;
 
 public class Main {
     public static ProductService productService = ProductServiceImpl.getInstance();
+    public static ProductFacade productFacade = ProductFacadeImpl.getInstance();
     static Scanner scan = new Scanner(System.in);
 
     public static void startMenu() {
@@ -153,11 +156,7 @@ public class Main {
                                 product = createOtherProduct();
                                 break;
                         }
-                        if (productService.saveProduct(product)) {
-                            System.out.println("done!");
-                        } else {
-                            System.out.println("fail!");
-                        }
+                        System.out.println(productFacade.createProduct(product));
                 }
 
 
