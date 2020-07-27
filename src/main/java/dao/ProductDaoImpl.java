@@ -47,7 +47,7 @@ public class ProductDaoImpl implements ProductDao {
         PreparedStatement preparedStatement = null;
 
         try {
-            String query = "INSERT INTO " + tableName + " (productName, price, weight, color, productCount VALUES (?,?,?,?,?)";
+            String query = "INSERT INTO " + tableName + " (productName, price, weight, color, productCount) VALUES (?,?,?,?,?)";
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, product.getProductName());
             preparedStatement.setFloat(2, product.getPrice());
