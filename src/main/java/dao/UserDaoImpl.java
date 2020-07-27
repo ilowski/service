@@ -89,7 +89,7 @@ public class UserDaoImpl implements UserDao {
                 String loginResult = resultSet.getString("login");
                 String password = resultSet.getString("password");
                 User user = new User(id, loginResult, password);
-
+                return user;
             }
             statement.close();
         }
