@@ -1,17 +1,21 @@
 package api;
 
 import entity.Product;
+import exceptions.ProductCountNegativeException;
+import exceptions.ProductNameEmptyException;
+import exceptions.ProductPriceNoPositiveException;
+import exceptions.ProductWeightNoPositiveException;
 
-import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 
 public interface ProductService {
-    ArrayList<Product> getAllProducts() throws IOException;
-    int countAllProducts() throws IOException;
-    Product getProductByProductName(String productName) throws IOException;
+
+    List<Product> getAllProducts();
+    int countAllProducts();
+    Product getProductByProductName(String productName);
     boolean isProductAvaiableByProductName(String productName);
     boolean isProductExistByProductName(String productName);
     boolean isProductExistByProductId(int id);
-    boolean saveProduct(Product product);
+    boolean saveProduct(Product product) throws ProductWeightNoPositiveException, ProductPriceNoPositiveException, ProductNameEmptyException, ProductCountNegativeException;
 
 }
